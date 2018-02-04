@@ -5,7 +5,7 @@ function Letter(character){
 	this.guessed = false;
 
 	this.hasGuessed = function(){
-		if(this.guessed){
+		if(this.guessed === true){
 			return this.character;
 		}
 		else{
@@ -15,14 +15,21 @@ function Letter(character){
 	}
 	//
 	this.checkCharacter = function(char){
+		
 		if(char === this.character){
 			this.guessed = true;
 		}
-		else{
-			this.guessed = false;
-		}
+		
 	}
 
 }//constructor
 
 module.exports = Letter;
+
+// var l = new Letter("h");
+// console.log(l.character,l.guessed);
+// console.log(l.hasGuessed());
+// l.guessed = true;
+// console.log(l.hasGuessed());
+// l.checkCharacter("o");
+// console.log(l.guessed);
