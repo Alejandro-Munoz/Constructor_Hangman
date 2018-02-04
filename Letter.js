@@ -1,5 +1,5 @@
 
-
+//constructor function for new letters
 function Letter(character){
 	this.character = character;
 	this.guessed = false;
@@ -26,10 +26,3 @@ function Letter(character){
 
 module.exports = Letter;
 
-// var l = new Letter("h");
-// console.log(l.character,l.guessed);
-// console.log(l.hasGuessed());
-// l.guessed = true;
-// console.log(l.hasGuessed());
-// l.checkCharacter("o");
-// console.log(l.guessed);
