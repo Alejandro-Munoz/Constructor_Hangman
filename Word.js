@@ -6,7 +6,7 @@ function Word(inputWord){
 	this.letters = [];
 	debugger;
 	for(var i = 0; i < inputWord.length; i++){
-		this.letters.push(new Letter(inputWord[i]));
+		this.letters.push(new Letter(inputWord[i].toLowerCase()));
 	}
 
 	this.getWord = function(){

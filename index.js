@@ -1,9 +1,9 @@
 var inquirer = require("inquirer");
 var Word = require("./Word.js");
-
+var animals = require("./animals.js");
 
 function startGame(){
-	var arrWords = ["cat","dog","horse","bunny","frog","bird",];
+	var arrWords = animals;
 	var limitGuesses = 10;
 	var numberOfGuesses = 0;
 
@@ -11,7 +11,7 @@ function startGame(){
 	var newWord = new Word(randomWord);
 
 	function selectWord(){
-		var index = Math.floor(Math.random() * 5)
+		var index = Math.floor(Math.random() * 224)
 
 		return arrWords[index]; 
 	}
@@ -25,7 +25,6 @@ function startGame(){
 				type:"input",
 				message:"Enter a letter:",
 				name:"letter",
-				default:"a",
 				validate:function(value){
 					if(value.length == 1){
 						return true;
@@ -37,20 +36,18 @@ function startGame(){
 				}
 			}
 		]).then(function(answers){
-			// console.log(answers.letter,numberOfGuesses);
+			//var that stores user input
 			var inputLetter = answers.letter;
 			
-
 			if((numberOfGuesses < limitGuesses)){
 				numberOfGuesses++;
 
 				newWord.guessLetter(inputLetter);
 
-				// console.log("randomWord: ", randomWord);
 				console.log("gueesed letters: ", newWord.getWord());
 				console.log("#guesses-remaining: ", limitGuesses - numberOfGuesses)
-
-				if(randomWord.trim() === newWord.getWord().trim()){
+				
+				if(randomWord.toLowerCase().trim() === newWord.getWord().toLowerCase().trim()){
 					console.log("You Win!!!");
 					inquirer.prompt([
 						{
@@ -76,6 +73,24 @@ function startGame(){
 			}
 			else{
 				console.log("You Loose!");
+				console.log("Hidden Word: ", randomWord);
+
+				inquirer.prompt([
+						{
+							type: "list",
+						    name: "play",
+						    message: "Play again?",
+						    choices: ["Yes", "No"]
+						}
+					]).then(function(answers){
+						// console.log(answers.letter,numberOfGuesses);
+						console.log(answers.play);
+
+						if(answers.play === "Yes"){
+							startGame();
+						}
+
+					})//inquirer play again
 			}
 
 		})//inquirer
